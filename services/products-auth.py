@@ -15,15 +15,20 @@ def token_required(f):
        # token = request.cookies.get('token')
        # Extract the JWT from the Authorization header instead
         auth_header = request.headers.get('Authorization')
-        if not auth_header:
-            return jsonify({'error': 'Authorization required'}), 401
-        try:
-            token = auth_header.split()[1]
-            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-            current_user_id = data['user_id']
-        except DecodeError:
-            return jsonify({'error': 'Authorization token is invalid'}), 401
-        return f(current_user_id, *args, **kwargs)
+
+        if auth_header:
+            # The header is typically in the format "Bearer <token>"
+            try:
+                token = auth_header.split()[1]
+                data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+                current_user_id = data['user_id']
+            except IndexError:
+                return jsonify({'message': 'Authorization token not found!'}), 401
+            except DecodeError:
+                return jsonify({'error': 'Authorization token is invalid'}), 401
+            return f(current_user_id, *args, **kwargs)
+        else:
+            return jsonify({'message': 'Authorization header is missing!'}), 401
     return decorated
 
 # API endpoint for user authentication
