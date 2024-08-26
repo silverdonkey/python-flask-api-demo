@@ -34,6 +34,7 @@ def token_required(f):
 # API endpoint for user authentication
 with open('db/users.json', 'r') as f:
     users = json.load(f)
+
 @app.route('/auth', methods=['POST'])
 def authenticate_user():
     if request.headers['Content-Type'] != 'application/json':
@@ -45,7 +46,7 @@ def authenticate_user():
             token = jwt.encode({'user_id': user['id']}, app.config['SECRET_KEY'],algorithm="HS256")
             response = make_response(jsonify({'message': 'Authentication successful',
                                               'token': token}))
-            # do not set the cookie, token is being sent in the rewponse above
+            # do not set the cookie, token is being sent in the response above
             # response.set_cookie('token', token)
             return response, 200
     return jsonify({'error': 'Invalid username or password'}), 401
