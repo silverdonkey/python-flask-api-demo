@@ -46,20 +46,20 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.8_845GxppHXMy8RRLJafgGWVWWO4pndpINxnAdPEKdo",
-						"type": "text",
-						"disabled": true
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.AGxlTS9Cflisms2pGglyEQSbd6n5JuFc0TVqiGRJyTM",
+						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:5000/products-auth",
+					"raw": "http://localhost:5000/auth/products",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
-						"products-auth"
+						"auth",
+						"products"
 					]
 				}
 			},

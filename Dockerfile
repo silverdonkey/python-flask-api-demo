@@ -11,4 +11,4 @@ COPY services/ ./services
 
 EXPOSE 5000
 
-ENTRYPOINT ["python", "./services/products-auth.py"]
+ENTRYPOINT ["python", "./services/auth/products.py"]

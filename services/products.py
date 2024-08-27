@@ -6,7 +6,7 @@ port = int(os.environ.get('PORT', 5000))
 
 @app.route("/")
 def home():
-    return "Hello, this is a Flask Microservice"
+    return "Hello, this is a Flask Microservice with public endpoint /products."
 
 
 BASE_URL = "https://dummyjson.com"

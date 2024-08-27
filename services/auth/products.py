@@ -9,6 +9,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(24)
 port = int(os.environ.get('PORT', 5000))
 
+#To verify JWTs, we create a decorator function and annotate the API routes with it. 
+# This decorator function will authenticate and validate users before they access protected routes. 
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -53,15 +55,14 @@ def authenticate_user():
 
 @app.route("/")
 def home():
-    return "Hello, this is a Secured Flask Microservice"
+    return "Hello, this is a Simple Flask Microservice with public endpoint / and protected endpoint /auth/products."
 
 
 BASE_URL = "https://dummyjson.com"
 
-@app.route('/products', methods=['GET'])
+@app.route('/auth/products', methods=['GET'])
 @token_required
-def get_products(current_user_id):
-    #headers = {'Authorization': f'Bearer {request.cookies.get("token")}'}    
+def get_auth_products(current_user_id):
     response = requests.get(f"{BASE_URL}/products")
     if response.status_code != 200:
         return jsonify({'error': response.json()['message']}), response.status_code
@@ -76,7 +77,7 @@ def get_products(current_user_id):
         }
         products.append(product_data)
 
-    return jsonify({'data': products}), 200 if products else 204
+    return jsonify({'current_user': current_user_id, 'products': products}), 200 if products else 204
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=port)
