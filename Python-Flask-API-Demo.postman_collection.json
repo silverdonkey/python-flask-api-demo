@@ -46,7 +46,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.AGxlTS9Cflisms2pGglyEQSbd6n5JuFc0TVqiGRJyTM",
+						"value": "Bearer ",
 						"type": "text"
 					}
 				],
