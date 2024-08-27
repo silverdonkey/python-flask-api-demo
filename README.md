@@ -43,9 +43,17 @@ Run the container (in the background), exposing ports 5000, 5001:
 
         docker run -d --name flask-microservice -p 5000:5000 -p 5001:5001 flask-microservice:1.0.0
 
+To stop the container:         
+
+        # first get the id of the running container
+        docker ps -q
+        # then stop it
+        docker stop <container-id>
+
+
 This command will start a Docker container running the microservice and expose port 5000 on the container to port 5000 on the host machine, allowing you to make HTTP requests from your web browser or Postman using the URL http://localhost:5000.
 
-To start the public microservice from whithin the running container on port 5001 execute the command: 
+To start the public microservice from whithin the running container parallel to the secured microservice (with port=5001) execute the command: 
 
         docker exec -e PORT=5001 -it flask-microservice sh -c "python services/products.py"
 
