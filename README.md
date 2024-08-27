@@ -4,15 +4,14 @@
 - Implements a simple Flask Microservice
 - Endpoints: 
     - Home: /
-    - Products: /products
-    - Auth Products: /auth/products (Authentication Token required)
-    - Authentication: /auth (generate auth token for secured endpoints) 
+    - (public) Products: /products
+    - (protected) Products: /auth/products (Authentication Token required)
+    - Authentication: /auth (generate auth token for secured endpoints using credentials) 
 
 ## Build and Run
 1. From the project directory call the prep.sh script to set up the virtual env and install dependencies: 
 
-    ./prep.sh
-
+        ./prep.sh
 
 
 2. To start the `public` microservice (without authentication), spin up the Flask development server, which will start running at `http://localhost:5000` and then make a HTTP GET request  `http://localhost:5000/products` from your browser or use the provided Postman collection.
@@ -46,7 +45,7 @@ Run the container (in the background), exposing ports 5000, 5001:
 
 This command will start a Docker container running the microservice and expose port 5000 on the container to port 5000 on the host machine, allowing you to make HTTP requests from your web browser or Postman using the URL http://localhost:5000.
 
-To start the public microservice from whithin the running container  on port 5001 execute the command: 
+To start the public microservice from whithin the running container on port 5001 execute the command: 
 
         docker exec -e PORT=5001 -it flask-microservice sh -c "python services/products.py"
 
